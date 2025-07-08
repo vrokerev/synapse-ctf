@@ -60,5 +60,6 @@ const options = {
   top: 0;
   left: 0;
   z-index: 0;
+  pointer-events: none;
 }
 </style>
