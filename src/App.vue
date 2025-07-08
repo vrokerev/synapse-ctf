@@ -1,21 +1,21 @@
 <template>
-  <div class="min-h-screen w-full bg-black text-neon-green font-mono relative overflow-x-hidden flex items-center justify-center">
+  <div class="app-container">
     <ParticleBackground />
-    <div class="relative z-10 w-full max-w-6xl px-4 py-8">
-      <h1 class="text-center text-3xl font-bold mb-6">Synapse CTF</h1>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 h-[70vh]">
-        <div class="h-full">
-          <InfoForm class="h-full" :info="info" @update="updateInfo" />
+    <div class="content-wrapper">
+      <h1 class="title">Synapse CTF</h1>
+      <div class="columns-wrapper">
+        <div class="column">
+          <InfoForm :info="info" @update="updateInfo" />
         </div>
-        <div class="h-full">
-          <SectionEditor class="h-full" :currentSection="currentSection" @save="saveSection" />
+        <div class="column">
+          <SectionEditor :currentSection="currentSection" @save="saveSection" />
         </div>
-        <div class="h-full">
-          <SectionList class="h-full"
-                       :sections="sections"
-                       @edit="editSection"
-                       @delete="deleteSection"
-                       @reorder="reorderSections"
+        <div class="column">
+          <SectionList
+              :sections="sections"
+              @edit="editSection"
+              @delete="deleteSection"
+              @reorder="reorderSections"
           />
         </div>
       </div>
@@ -26,16 +26,21 @@
 
 
 
-<style scoped>
+
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-.text-neon-green {
-  color: #39ff14;
+.columns-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  height: 100vh;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: stretch;
 }
 
-.font-mono {
-  font-family: 'Courier New', Courier, monospace;
-}
 
 body {
   margin: 0;
@@ -57,8 +62,6 @@ h1 {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
   padding: 0 1rem;
-  height: 100%; /* Asegura altura completa en grid */
-  align-items: stretch; /* Estira columnas para misma altura */
 }
 
 .relative {
@@ -69,10 +72,10 @@ h1 {
   z-index: 10;
 }
 
+.column {
+  height: 70vh;
+}
 </style>
-
-
-
 
 <script setup>
 import { ref } from 'vue'
